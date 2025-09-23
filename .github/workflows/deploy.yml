@@ -41,3 +41,17 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID}}/my-repo/clip-gke:latest
+
+      - name: Auth GKE 
+        uses: google-github-actions/gke-deploy@v1
+        with:
+          cluster_name: clip-gke
+          location: ${{ secrets.GCP_ZONE }}
+          credentials: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Deploy to GKE
+        run: |
+          kubectl apply -f k8/deployment.yml
+          kubectl rollout status deployment/clip-gke
+
+        
