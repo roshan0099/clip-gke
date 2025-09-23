@@ -43,7 +43,7 @@ jobs:
           docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID}}/my-repo/clip-gke:latest
 
       - name: Auth GKE 
-        uses: google-github-actions/gke-deploy@v1
+        uses: google-github-actions/deploy-gke@v1
         with:
           cluster_name: clip-gke
           location: ${{ secrets.GCP_ZONE }}
