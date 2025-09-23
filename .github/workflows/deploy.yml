@@ -26,6 +26,14 @@ jobs:
           version: 'latest'
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
+      - name: Configure Docker
+        run: |
+          gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
+
+      - name: Docker Login
+        run: |
+          gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
+
       - name: Docker Build Stage
         run: |
           docker build -t ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID}}/my-repo/clip-gke:latest .
