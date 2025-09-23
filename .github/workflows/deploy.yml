@@ -13,4 +13,15 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Checking pipeline
-        run: echo "Deploying to GKE"
+        run: echo "Deploying to GKE" ${{github.sha}}
+
+      - name: Auth using gcloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_KEY }} 
+      
+      - name: Setting up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: 'latest'
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
