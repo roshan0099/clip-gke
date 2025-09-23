@@ -42,12 +42,16 @@ jobs:
         run: |
           docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID}}/my-repo/clip-gke:latest
 
-      - name: Auth GKE 
-        uses: google-github-actions/deploy-gke@v1
-        with:
-          cluster_name: clip-gke
-          location: ${{ secrets.GCP_ZONE }}
-          credentials: ${{ secrets.GCP_SA_KEY }}
+      # - name: Auth GKE 
+      #   uses: google-github-actions/deploy-gke@v1
+      #   with:
+      #     cluster_name: clip-gke
+      #     location: ${{ secrets.GCP_ZONE }}
+      #     credentials: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Getting GKE credentials
+        run: |
+          gcloud container clusters get-credentials clip-gke --zone ${{ secrets.GCP_ZONE }}
 
       - name: Deploy to GKE
         run: |
