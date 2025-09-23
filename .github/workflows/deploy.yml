@@ -25,3 +25,11 @@ jobs:
         with:
           version: 'latest'
           project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Docker Build Stage
+        run: |
+          docker build -t ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID}}/my-repo/clip-gke:latest .
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID}}/my-repo/clip-gke:latest
