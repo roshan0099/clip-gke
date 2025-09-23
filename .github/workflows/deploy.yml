@@ -52,7 +52,7 @@ jobs:
       - name: GKE credentials
         uses: google-github-actions/get-gke-credentials@v1
         with:
-          cluster-name: clip-gke
+          cluster_name: clip-gke
           location: ${{ secrets.GCP_ZONE }}
 
 
