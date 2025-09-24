@@ -12,8 +12,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: Checking pipeline
-        run: cd k8 && ls -la 
+      - name: Github SHA val
+        run: echo ${{github.sha}} 
 
       - name: Auth using gcloud
         uses: google-github-actions/auth@v2
