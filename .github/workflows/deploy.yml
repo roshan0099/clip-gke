@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Checking pipeline
-        run: echo "Deploying to GKE" ${{github.sha}}
+        run: ls -la 
 
       - name: Auth using gcloud
         uses: google-github-actions/auth@v2
