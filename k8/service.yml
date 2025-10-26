@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: clip-gke-service
+  labels:
+    app: clip-gke-prometheus
+spec:
+  selector:
+    app: clip-gke
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8000
+  
+
+---
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: clip-gke-service-monitor
+spec:
+  selector:
+    matchLabels:
+      app: clip-gke-prometheus
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
