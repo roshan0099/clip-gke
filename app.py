@@ -4,12 +4,16 @@ import torch
 import clip
 from PIL import Image
 import io
+from starlette_exporter import PrometheusMiddleware, handle_metrics
 
 # Load CLIP model once at startup
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
 
 app = FastAPI()
+
+app.add_middleware(PrometheusMiddleware)
+app.add_route("/metrics", handle_metrics)
 
 @app.get("/")
 def read_root():
