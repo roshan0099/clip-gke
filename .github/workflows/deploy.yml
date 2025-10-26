@@ -64,6 +64,7 @@ jobs:
         run: |
           kubectl delete deployment clip-gke || true
           kubectl apply -f k8/deployment.yml
+          kubectl apply -f k8/service.yml
           kubectl rollout status deployment/clip-gke
 
         
