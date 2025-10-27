@@ -63,6 +63,7 @@ jobs:
       - name: Deploy to GKE
         run: |
           kubectl delete deployment clip-gke || true
+          kubectl delete svc --all || true
           kubectl apply -f k8/deployment.yml
           kubectl apply -f k8/service.yml
           kubectl rollout status deployment/clip-gke
