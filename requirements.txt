@@ -9,3 +9,4 @@ uvicorn
 pillow
 numpy<2
 python-multipart
+starlette-exporter==0.23.0
